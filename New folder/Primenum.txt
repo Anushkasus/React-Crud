@@ -1,0 +1,38 @@
+class NotPrimeException extends Exception {
+    public NotPrimeException(String message) {
+        super(message);
+    }
+}
+
+public class PrimeChecker {
+    public static boolean isPrime(int num) {
+        if (num < 2) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        try {
+            // Taking input from the user
+            System.out.print("Enter a number: ");
+            int number = Integer.parseInt(System.console().readLine());
+
+            if (isPrime(number)) {
+                System.out.println("Prime number");
+            } else {
+                throw new NotPrimeException("Not Prime Exception");
+            }
+
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+        } catch (NotPrimeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
